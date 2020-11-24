@@ -1,5 +1,6 @@
 package com.accenture.training.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,6 +53,13 @@ public class ProductsService {
 
 
 	public ProductsTO save(ProductsTO product) {
+		if (Strings.isEmpty(product.getId())){
+			product.setCreatedBy("app");
+			product.setCreatedAt(LocalDateTime.now().toString());
+		}
+		product.setModifiedBy("app");
+		product.setModifiedAt(LocalDateTime.now().toString());
+		
 		ProductsEntity savedEntity = rep.save(mapper.map(product, ProductsEntity.class));
 		return mapper.map(savedEntity, ProductsTO.class);
 	}

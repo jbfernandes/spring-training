@@ -24,4 +24,48 @@ public class UsersTO implements Serializable {
 		this.name = name;
 	}
 
+	
+	private String createdAt;
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+
+	private String createdBy;
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+
+	private String modifiedAt;
+
+	public String getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(String modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+	
+	
+	private String modifiedBy;
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
 }

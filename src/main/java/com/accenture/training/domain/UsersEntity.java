@@ -1,5 +1,7 @@
 package com.accenture.training.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +38,49 @@ public class UsersEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	@Column(name = "\"CREATEDAT\"")
+	private LocalDateTime createdAt;
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+	
+	@Column(name = "\"CREATEDBY\"")
+	private String createdBy;
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@Column(name = "\"MODIFIEDAT\"")
+	private LocalDateTime modifiedAt;
+
+	public LocalDateTime getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(LocalDateTime modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+	
+	@Column(name = "\"MODIFIEDBY\"")
+	private String modifiedBy;
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
 	}
 
 
