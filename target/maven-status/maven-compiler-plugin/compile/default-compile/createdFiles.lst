@@ -1,0 +1,7 @@
+com\accenture\training\config\SpringConfig.class
+com\accenture\training\MyApplication.class
+com\accenture\training\dto\ProductsTO.class
+com\accenture\training\service\ProductsService.class
+com\accenture\training\repository\ProductsRepository.class
+com\accenture\training\controller\ProductsController.class
+com\accenture\training\domain\ProductsEntity.class
