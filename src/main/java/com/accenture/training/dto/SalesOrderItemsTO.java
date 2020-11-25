@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.accenture.training.domain.SalesOrdersEntity;
 
 public class SalesOrderItemsTO implements Serializable {
 
@@ -19,6 +18,8 @@ public class SalesOrderItemsTO implements Serializable {
 	private Integer quantity;
 	
 
+	private ProductsTO product;
+	
 	private String salesOrderId;
 	
 	private String createdAt;
@@ -97,6 +98,14 @@ public class SalesOrderItemsTO implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public ProductsTO getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductsTO product) {
+		this.product = product;
 	}
 
 }

@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.accenture.training.domain.ProductsEntity;
+
 @Entity
 @Table(name = "\"TRAINING_SALESORDER_TBLSALESORDERITEM\"")
 public class SalesOrderItemsEntity {
@@ -69,8 +71,8 @@ public class SalesOrderItemsEntity {
 		this.salesOrder = salesOrder;
 	}
 
-	/*
-	@OneToOne
+
+	@ManyToOne
     @JoinColumn(name = "\"PRODUCT_ID\"")
 	private ProductsEntity product;	
 
@@ -81,7 +83,6 @@ public class SalesOrderItemsEntity {
 	public void setProduct(ProductsEntity product) {
 		this.product = product;
 	}
-	*/
 	
 	
 	@Column(name = "\"CREATEDAT\"")
