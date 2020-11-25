@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.accenture.training.domain.SalesOrdersEntity;
 import com.accenture.training.dto.SalesOrderItemsTO;
 import com.accenture.training.dto.SalesOrdersTO;
+import com.accenture.training.repository.SalesOrderItemsRepository;
 import com.accenture.training.repository.SalesOrdersRepository;
 
 @Service
@@ -21,6 +22,9 @@ public class SalesOrdersService {
 	
 	@Autowired
 	SalesOrdersRepository rep;
+	
+	@Autowired
+	SalesOrderItemsRepository itemsRep;
 		
 	@Autowired
 	ModelMapper mapper;
@@ -30,7 +34,7 @@ public class SalesOrdersService {
 	public List<SalesOrdersTO> findAll(String status){
 		List<SalesOrdersEntity> result = null;
 		if (Strings.isEmpty(status)) {
-			result = rep.findAll();
+			result = rep.internalFindAll();
 		} else {
 			result = rep.findByStatusOrderByCreatedAtDesc(status);
 		}
@@ -48,6 +52,23 @@ public class SalesOrdersService {
 		}).collect(Collectors.toList());
 	}
 
+	
+
+	public SalesOrdersTO findById(String id) {
+		SalesOrdersEntity findById = rep.internalFindById(id);
+		if(findById != null){
+			SalesOrdersTO salesOrder = mapper.map(findById, SalesOrdersTO.class);
+
+			List<SalesOrderItemsTO> collect = salesOrder.getItems().stream().map(salesOrderItem -> {
+				return mapper.map(salesOrderItem, SalesOrderItemsTO.class);
+			}).collect(Collectors.toList());
+			
+			salesOrder.setItems(collect);
+			
+			return salesOrder;
+		}
+		return null;
+	}
 
 
 
@@ -62,6 +83,10 @@ public class SalesOrdersService {
 		salesOrderEntity.setModifiedAt(LocalDateTime.now());
 		
 		SalesOrdersEntity savedEntity = rep.save(salesOrderEntity);
+		
+		salesOrderEntity.getItems().stream().forEach(item -> item.setSalesOrder(savedEntity));		
+		itemsRep.saveAll(salesOrderEntity.getItems());
+		
 		return mapper.map(savedEntity, SalesOrdersTO.class);
 	}
 
@@ -74,14 +99,5 @@ public class SalesOrdersService {
 	}
 
 
-
-
-	public SalesOrdersTO findById(String id) {
-		Optional<SalesOrdersEntity> findById = rep.findById(id);
-		if(findById.isPresent()){
-			return mapper.map(findById.get(), SalesOrdersTO.class);
-		}
-		return null;
-	}
 
 }

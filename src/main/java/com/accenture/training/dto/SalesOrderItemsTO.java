@@ -14,63 +14,59 @@ public class SalesOrderItemsTO implements Serializable {
 	
 	private String id;
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-
 	private String status;
-	
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 
 	private Integer quantity;
-		
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
 	
 
-	private SalesOrdersEntity salesOrder;	
-
-	public SalesOrdersEntity getSalesOrder() {
-		return salesOrder;
-	}
-
-	public void setSalesOrder(SalesOrdersEntity salesOrder) {
-		this.salesOrder = salesOrder;
-	}
-	
+	private String salesOrderId;
 	
 	private String createdAt;
+
+	private String createdBy;
+
+
+	private String modifiedAt;
+		
+	private String modifiedBy;
 
 	public String getCreatedAt() {
 		return createdAt;
 	}
-
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
-
-
-	private String createdBy;
+	
 	
 	public String getCreatedBy() {
 		return createdBy;
+	}	
+
+	public String getId() {
+		return id;
+	}
+
+	public String getModifiedAt() {
+		return modifiedAt;
+	}
+
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public String getSalesOrderId() {
+		return salesOrderId;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public void setCreatedBy(String createdBy) {
@@ -78,25 +74,29 @@ public class SalesOrderItemsTO implements Serializable {
 	}
 
 
-	private String modifiedAt;
-
-	public String getModifiedAt() {
-		return modifiedAt;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setModifiedAt(String modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
-	
-	
-	private String modifiedBy;
-
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
 
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
+	}
+	
+	
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public void setSalesOrderId(String salesOrderId) {
+		this.salesOrderId = salesOrderId;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

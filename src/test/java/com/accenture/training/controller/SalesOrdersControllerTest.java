@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.accenture.training.dto.SalesOrderItemsTO;
 import com.accenture.training.dto.SalesOrdersTO;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,6 +50,13 @@ public class SalesOrdersControllerTest {
 	private static void getSalesOrderTest() {
 		SalesOrdersTO salesOrdersTO = new SalesOrdersTO();
 		salesOrdersTO.setStatus("D");
+		
+		SalesOrderItemsTO salesOrderItemTO = new SalesOrderItemsTO();
+		salesOrderItemTO.setQuantity(123);
+		
+		List<SalesOrderItemsTO> items = new ArrayList<SalesOrderItemsTO>();
+		items.add(salesOrderItemTO);
+		salesOrdersTO.setItems(items);
 		salesOrder = salesOrdersTO;
 	}
 
@@ -143,6 +152,9 @@ public class SalesOrdersControllerTest {
 		final SalesOrdersTO objResult = mapper.readValue(result, SalesOrdersTO.class);
 		assertThat(objResult.getId()).isEqualTo(salesOrder.getId());
 
+		assertThat(objResult.getItems().size()).isGreaterThan(0);
+		assertThat(objResult.getItems().get(0).getQuantity()).isEqualTo(123);
+		
 	}
 	@Test
 	public void az_deleteSalesOrder() throws UnsupportedEncodingException, Exception {

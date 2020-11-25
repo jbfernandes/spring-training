@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "\"TRAINING_SALESORDER_TBLSALESORDER\"")
+@Table(name = "\"TRAINING_SALESORDER_TBLSALESORDERITEM\"")
 public class SalesOrderItemsEntity {
 
 	@Id
