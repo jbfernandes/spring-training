@@ -12,6 +12,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.accenture.training.domain.ClientsEntity;
+import com.accenture.training.domain.ProductsEntity;
 import com.accenture.training.dto.ClientsTO;
 import com.accenture.training.repository.ClientsRepository;
 
@@ -53,14 +54,16 @@ public class ClientsService {
 
 
 	public ClientsTO save(ClientsTO client) {
-		if (Strings.isEmpty(client.getId())){
-			client.setCreatedBy("app");
-			client.setCreatedAt(LocalDateTime.now().toString());
-		}
-		client.setModifiedBy("app");
-		client.setModifiedAt(LocalDateTime.now().toString());
+		ClientsEntity clientEntity = mapper.map(client, ClientsEntity.class);
 		
-		ClientsEntity savedEntity = rep.save(mapper.map(client, ClientsEntity.class));
+		if (Strings.isEmpty(clientEntity.getId())){
+			clientEntity.setCreatedBy("app");
+			clientEntity.setCreatedAt(LocalDateTime.now());
+		}
+		clientEntity.setModifiedBy("app");
+		clientEntity.setModifiedAt(LocalDateTime.now());
+		
+		ClientsEntity savedEntity = rep.save(clientEntity);		
 		return mapper.map(savedEntity, ClientsTO.class);
 	}
 

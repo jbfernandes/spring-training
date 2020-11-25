@@ -53,14 +53,16 @@ public class UsersService {
 
 
 	public UsersTO save(UsersTO user) {
-		if (Strings.isEmpty(user.getId())){
-			user.setCreatedBy("app");
-			user.setCreatedAt(LocalDateTime.now().toString());
-		}
-		user.setModifiedBy("app");
-		user.setModifiedAt(LocalDateTime.now().toString());
+		UsersEntity userEntity = mapper.map(user, UsersEntity.class);
 		
-		UsersEntity savedEntity = rep.save(mapper.map(user, UsersEntity.class));
+		if (Strings.isEmpty(userEntity.getId())){
+			userEntity.setCreatedBy("app");
+			userEntity.setCreatedAt(LocalDateTime.now());
+		}
+		userEntity.setModifiedBy("app");
+		userEntity.setModifiedAt(LocalDateTime.now());
+		
+		UsersEntity savedEntity = rep.save(userEntity);
 		return mapper.map(savedEntity, UsersTO.class);
 	}
 

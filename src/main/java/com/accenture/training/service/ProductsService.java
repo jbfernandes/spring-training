@@ -12,6 +12,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.accenture.training.domain.ProductsEntity;
+import com.accenture.training.domain.UsersEntity;
 import com.accenture.training.dto.ProductsTO;
 import com.accenture.training.repository.ProductsRepository;
 
@@ -53,14 +54,16 @@ public class ProductsService {
 
 
 	public ProductsTO save(ProductsTO product) {
-		if (Strings.isEmpty(product.getId())){
-			product.setCreatedBy("app");
-			product.setCreatedAt(LocalDateTime.now().toString());
-		}
-		product.setModifiedBy("app");
-		product.setModifiedAt(LocalDateTime.now().toString());
+		ProductsEntity productEntity = mapper.map(product, ProductsEntity.class);
 		
-		ProductsEntity savedEntity = rep.save(mapper.map(product, ProductsEntity.class));
+		if (Strings.isEmpty(productEntity.getId())){
+			productEntity.setCreatedBy("app");
+			productEntity.setCreatedAt(LocalDateTime.now());
+		}
+		productEntity.setModifiedBy("app");
+		productEntity.setModifiedAt(LocalDateTime.now());
+		
+		ProductsEntity savedEntity = rep.save(productEntity);
 		return mapper.map(savedEntity, ProductsTO.class);
 	}
 
